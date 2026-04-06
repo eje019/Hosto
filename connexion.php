@@ -9,7 +9,7 @@ Rediriger vers le tableau de bord
 Si erreur → afficher un message -->
 
 
-<<?php
+<?php
 // Démarrer la session (toujours en premier)
 session_start();
 
