@@ -9,13 +9,13 @@ Rediriger vers le tableau de bord
 Si erreur → afficher un message -->
 
 
-<?php
-//demarrer la session (toujours en premier)
+<<?php
+// Démarrer la session (toujours en premier)
 session_start();
 
-//si utilisateur connecté, rediriger vers dashbaord
+// Si déjà connecté, rediriger vers le tableau de bord
 if (isset($_SESSION['utilisateur_id'])) {
-    header("Location : tableau_de_bord.php");
+    header('Location: tableau_de_bord.php');
     exit;
 }
 
@@ -23,50 +23,51 @@ require_once 'connexion_bdd.php';
 
 $erreur = '';
 
-//traitement du formulaire
-if($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    //on cherche l;utilisateur par son mail
+// Traitement du formulaire
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    // Chercher l'utilisateur par son email
     $sql = "SELECT * FROM utilisateurs WHERE email = :email";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([":email" => $_POST["email"]]);
+    $stmt->execute([':email' => $_POST['email']]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    //verifions si lutilisateur existe et si le mot de passe est correct 
+    
+    // Vérifier si l'utilisateur existe ET si le mot de passe est correct
     if ($utilisateur && password_verify($_POST['mot_de_passe'], $utilisateur['mot_de_passe'])) {
-        //connexion reussie -> on enregistre en session
+        
+        // Connexion réussie → on enregistre en session
         $_SESSION['utilisateur_id'] = $utilisateur['utilisateur_id'];
         $_SESSION['utilisateur_nom'] = $utilisateur['nom'] . ' ' . $utilisateur['prenoms'];
-        $_SESSION['utilisateur_email'] = $utilisateur['email'];    
+        $_SESSION['utilisateur_email'] = $utilisateur['email'];
         
-        //on redirige vers le dashboard
-        header('ocation: tableau_de_bord.php');
+        // Rediriger vers le tableau de bord
+        header('Location: tableau_de_bord.php');
         exit;
-    }
-    else {
-        $erreur = "Email ou mot de passe incorrect";
+    } else {
+        $erreur = "Email ou mot de passe incorrect.";
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - HOSTO</title>
 </head>
 <body>
-    <h1>Connectez vous</h1>
+    <h1>Se connecter</h1>
+    
     <?php if ($erreur): ?>
         <p style="color: red;"><?= $erreur ?></p>
     <?php endif; ?>
-
-    <form action="" method="POST">
+    
+    <form method="POST">
         <input type="email" name="email" placeholder="Email" required><br><br>
         <input type="password" name="mot_de_passe" placeholder="Mot de passe" required><br><br>
         <button type="submit">Se connecter</button>
-        <p>Pas de compte ? <a href="inscription.php">S'inscrire</a></p>
     </form>
+    
+    <p>Pas de compte ? <a href="inscription.php">S'inscrire</a></p>
 </body>
 </html>
