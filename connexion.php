@@ -33,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $utilisateurs = $stmt->fetch(PDO::FETCH_ASSOC);
 
     //verifions si lutilisateur existe et si le mot de passe est correct 
-    if ($utilisateur && password_verify($_POST['mot_de_passe'],$utilisateur['mot_de_passe'])) {
+    if ($utilisateur && password_verify($_POST['mot_de_passe'], $utilisateur['mot_de_passe'])) {
         //connexion reussie -> on enregistre en session
         $_SESSION['utilisateur_id'] = $utilisateur['utilisateur_id'];
         $_SESSION['utilisateur_nom'] = $utilisateur['nom'] . ' ' . $utilisateur['prenoms'];
@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="email" name="email" placeholder="Email required"><br><br>
         <input type="password" name="mot_de_passe" placeholder="Mot de passe" required><br><br>
         <button type="submit">Se connecter</button>
-        <p>Pas de compte ? <a href="inscription php">S'inscrire</a></p>
+        <p>Pas de compte ? <a href="inscription.php">S'inscrire</a></p>
     </form>
 </body>
 </html>
