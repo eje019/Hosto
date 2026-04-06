@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $sql = "SELECT * FROM utilisateurs WHERE email = :email";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([":email" => $_POST["email"]]);
-    $utilisateurs = $stmt->fetch(PDO::FETCH_ASSOC);
+    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
     //verifions si lutilisateur existe et si le mot de passe est correct 
     if ($utilisateur && password_verify($_POST['mot_de_passe'], $utilisateur['mot_de_passe'])) {
@@ -63,7 +63,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <form action="" method="POST">
-        <input type="email" name="email" placeholder="Email required"><br><br>
+        <input type="email" name="email" placeholder="Email" required><br><br>
         <input type="password" name="mot_de_passe" placeholder="Mot de passe" required><br><br>
         <button type="submit">Se connecter</button>
         <p>Pas de compte ? <a href="inscription.php">S'inscrire</a></p>
