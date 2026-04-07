@@ -22,9 +22,8 @@ if($_SERVER["REQUEST_METHOD"] === 'POST'){
     if($stmt->fetch()){
         $erreur = "Cet email est deja utilisé";
     } else {
-        $mot_de_passe_hache = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
-    }
-
+    $mot_de_passe_hache = password_hash($_POST['mot_de_passe'], PASSWORD_DEFAULT);
+    
     //insertion du nouvel utilisateur
     $sql = "INSERT INTO utilisateurs (nom, prenoms, email, mot_de_passe)
             VALUES (:nom, :prenoms, :email, :mot_de_passe)";
@@ -40,6 +39,7 @@ if($_SERVER["REQUEST_METHOD"] === 'POST'){
     header('Location: connexion.php');
     exit;
     //toujours mettre un exit apres avoir utilise un header
+    }
 }
 ?>
 
