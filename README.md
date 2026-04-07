@@ -195,17 +195,17 @@ VALUES
 ```
 
 ### 4. Placer les fichiers
-- Copier tous les fichiers PHP dans : `C:/xampp/htdocs/clinique/`
+- Copier tous les fichiers PHP dans : `C:/xampp/htdocs/hosto/`
 
 ### 5. Configurer la connexion
 - Vérifier que `connexion_bdd.php` contient les bons identifiants :
-  - Base : `clinique_sante_plus`
+  - Base : `hosto`
   - Utilisateur : `root`
   - Mot de passe : (vide par défaut)
 
 ### 6. Tester l'application
-- Créer un compte : http://localhost/clinique/inscription.php
-- Se connecter : http://localhost/clinique/connexion.php
+- Créer un compte : http://localhost/hosto/inscription.php
+- Se connecter : http://localhost/hosto/connexion.php
 - Utiliser l'application
 
 ---
