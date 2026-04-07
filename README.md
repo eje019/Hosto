@@ -123,7 +123,7 @@ Application web sécurisée permettant au personnel médical de gérer les consu
 ## Structure du projet
 
 ```
-HOSTO
+HOSTO/
 │
 ├── connexion_bdd.php          # Connexion à MySQL
 ├── inscription.php            # Créer un compte
